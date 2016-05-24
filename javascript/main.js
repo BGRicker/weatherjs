@@ -13,15 +13,12 @@ WeatherAPI.getForecast = function(){
 }
 
 WeatherAPI.onDataBack = function( data ) {
-  // console.log( data );
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[0].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[1].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[2].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[3].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[4].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[5].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[6].temperatureMax + "</div>";
-  document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[7].temperatureMax + "</div>";
+  // document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[0].temperatureMax + "</div>";
+
+  data.daily.data.forEach(function(currentItem, currentIndex) {
+    var currentDate = new Date( currentItem.time * 1000 );
+    document.querySelector('.js-forecast-container').innerHTML += "<div>" + currentDate + " " + currentItem.temperatureMax + "</div>";
+  });
 }
 
 WeatherAPI.getForecast();
