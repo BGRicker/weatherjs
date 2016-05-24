@@ -6,9 +6,14 @@ WeatherAPI.getForecast = function(){
   var url = 'https://api.forecast.io/forecast/'+ WeatherAPI.API_KEY +'/37.8267,-122.423';
 
   var scriptTag = document.createElement('script');
-  scriptTag.src = url;
+  // JSONP technique
+  scriptTag.src = url + "?callback=WeatherAPI.onDataBack";
   document.querySelector('body').appendChild( scriptTag );
 
+}
+
+WeatherAPI.onDataBack = function( data ) {
+  console.log( data );
 }
 
 WeatherAPI.getForecast();
