@@ -16,8 +16,27 @@ WeatherAPI.onDataBack = function( data ) {
   // document.querySelector('.js-forecast-container').innerHTML += "<div>" + data.daily.data[0].temperatureMax + "</div>";
 
   data.daily.data.forEach(function(currentItem, currentIndex) {
+
+    var daysOfWeek = [];
+    daysOfWeek[0] = "Sunday";
+    daysOfWeek[1] = "Monday";
+    daysOfWeek[2] = "Tuesday";
+    daysOfWeek[3] = "Wednesday";
+    daysOfWeek[4] = "Thursday";
+    daysOfWeek[5] = "Friday";
+    daysOfWeek[6] = "Saturday";
+
+    // console.log(daysOfWeek[new Date().getDay() ]);
+
+    var maxTemp = currentItem.temperatureMax;
+    var minTemp = currentItem.temperatureMin;
     var currentDate = new Date( currentItem.time * 1000 );
-    document.querySelector('.js-forecast-container').innerHTML += "<div>" + currentDate + " " + currentItem.temperatureMax + "</div>";
+    var currentDay = daysOfWeek[currentDate.getDay()];
+    var summary = currentItem.summary;
+
+
+    console.log(currentDay, maxTemp, minTemp, summary);
+    // document.querySelector('.js-forecast-container').innerHTML += "<div>" + currentDate + " " + currentItem.temperatureMax + "</div>";
   });
 }
 
