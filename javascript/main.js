@@ -2,8 +2,8 @@ var WeatherAPI = {};
 
 WeatherAPI.API_KEY = 'dcbdb3b43d97ccfc1eb6379f3b97c9b0'
 
-WeatherAPI.getForecast = function(){
-  var url = 'https://api.forecast.io/forecast/'+ WeatherAPI.API_KEY +'/37.8267,-122.423';
+WeatherAPI.getForecast = function(la, lo){
+  var url = 'https://api.forecast.io/forecast/'+ WeatherAPI.API_KEY +'/'+la+','+lo;
 
   var scriptTag = document.createElement('script');
   // JSONP technique
@@ -83,6 +83,15 @@ WeatherAPI.drawCard = function (maxTemp, minTemp, currentDay, summary) {
   document.querySelector('.js-card-container').appendChild(card);
 
   
+}
+
+if ( navigator.geolocation ) {
+  navigator.geolocation.getCurrentPosition(function(position){
+    WeatherAPI.getForecast(position.coords.latitude, position.coords.longitude);
+  });
+}
+else {
+  console.log('Geolocator not supported');
 }
 
 // <div class="card ui">
